@@ -38,5 +38,13 @@ def test_end_exactly_equal_to_start():
     # 时间点重合不算重叠，结果为空
     assert result == []
 
+    def test_reversed_time_range_raises_error():
+        # 结束时间早于开始时间：时间倒流
+        with pytest.raises(ValueError) as excinfo:
+            time_range("2010-01-12 12:00:00", "2010-01-12 10:00:00")
+        # 可选：额外校验报错信息是否匹配（推荐，老师很喜欢这个写法）
+        assert "End time" in str(excinfo.value)
+        assert "earlier than start time" in str(excinfo.value)
+
 if __name__ == "__main__":
     test_given_input()

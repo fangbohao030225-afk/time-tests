@@ -10,6 +10,8 @@ def time_range(start_time, end_time, number_of_intervals=1, gap_between_interval
                  for i in range(number_of_intervals)]
     return [(ta.strftime("%Y-%m-%d %H:%M:%S"), tb.strftime("%Y-%m-%d %H:%M:%S")) for ta, tb in sec_range]
 
+if end_time_s < start_time_s:
+        raise ValueError(f"End time {end_time} is earlier than start time {start_time}. Cannot create reversed time range.")
 
 def compute_overlap_time(range1, range2):
     overlap_time = []
